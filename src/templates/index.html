@@ -45,6 +45,18 @@
                     </form>
             </div>
         </div>
+        <div id="footer">
+            <div class="col-6 col-sm-6 col-md-6">
+                    <form>
+                            <a href=# id=land><button type="button" class="btn btn-info btn-lg">Land</button></a>
+                    </form>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6">
+                    <form>
+                            <a href=# id=takeoff><button type="button" class="btn btn-info btn-lg">Take off</button></a>
+                    </form>
+            </div>
+        </div>
     </div>
 
 <script type=text/javascript>
@@ -89,6 +101,26 @@
             return false;
           });
         });
+// Land
+      $(function() {
+        $('a#land').bind('click', function() {
+          $.getJSON('/land',
+              function(data) {
+            //do nothing
+          });
+          return false;
+        });
+      });
+// Take off
+      $(function() {
+        $('a#takeoff').bind('click', function() {
+          $.getJSON('/takeoff',
+              function(data) {
+            //do nothing
+          });
+          return false;
+        });
+      });
 </script>
 
 
