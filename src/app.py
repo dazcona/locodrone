@@ -3,7 +3,7 @@ from flask import render_template
 import tello
 import time
 from PIL import Image
-
+from control
 
 app = Flask(__name__)
 
@@ -11,9 +11,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     drone = tello.Tello('', 8989)
-    drone.takeoff()
-    drone.move('back', .02)
-    drone.land()
+    vplayer = TelloUI(drone, '/code')
     return render_template('index.html')
 
 @app.route('/forward')
