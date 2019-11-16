@@ -20,6 +20,7 @@ fly = Fly()
 @app.route('/')
 def index():
     if fly.empty:
+        print("Initializing drone...")
         fly.drone = tello.Tello('', 8889)
     # vplayer = TelloUI(drone, '/code')
     # time.sleep(3)
@@ -30,11 +31,12 @@ def index():
 def action(action):
     print(action)
     if action == 'land':
-        fly.drone.land()
+        result = fly.drone.land()
     elif action == 'takeoff':
-        fly.drone.takeoff()
+        result = fly.drone.takeoff()
     else:
-        fly.drone.move(action, .02)
+        result = fly.drone.move(action, 3)
+    print("Action result: ", result)
     return "200"
 
 
