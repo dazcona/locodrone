@@ -5,63 +5,48 @@ import time
 from PIL import Image
 
 
-app = Flask(__name__) 
-  
-@app.route('/') 
-def index(): 
+app = Flask(__name__)
+
+
+@app.route('/')
+def index():
+    drone = tello.Tello('', 8989)
+    drone.takeoff()
+    drone.move('back', .02)
+    drone.land()
     return render_template('index.html')
 
-@app.route('/forward') 
-def forward(): 
-    print('forward!!')
+@app.route('/forward')
+def forward():
+    drone.move('forward', .02)
     return "200"
 
-@app.route('/right') 
-def right(): 
-    print('right!!')
+@app.route('/right')
+def right():
+    drone.move('right', .02)
     return "200"
 
-@app.route('/back') 
-def back(): 
-    print('back!!')
+@app.route('/back')
+def back():
+    drone.move('back', .02)
     return "200"
 
-@app.route('/left') 
-def left(): 
-    print('left!!')
+@app.route('/left')
+def left():
+    drone.move('left', .02)
     return "200"
 
+@app.route('/land')
+def land():
+    drone.land()
+    return "200"
 
-@app.route('/video') 
-def video():
-
-    drone = tello.Tello('', 8889) 
-
+@app.route('/takeoff')
+def takeoff():
     drone.takeoff()
-
-    time.sleep(5)
-
-    while True:
-
-        print('Reading drone!')
-        frame = drone.read()
-
-        if frame is None or frame.size == 0:
-            print('Nothing!')
-            continue
-
-        print('Get Image!')
-        image = Image.fromarray(frame)
-
-        print('Save Image!')
-        image.save("drone.jpg")
-
-        time.sleep(3)
+    return "200"
 
 
-    return render_template('video.html')
+if __name__ == '__main__':
 
-  
-if __name__ == '__main__': 
-  
-    app.run(debug=True, host='0.0.0.0') 
+    app.run(debug=True, host='0.0.0.0', port=5001)

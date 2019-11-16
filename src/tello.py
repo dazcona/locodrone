@@ -25,7 +25,7 @@ class Tello:
         self.decoder = libh264decoder.H264Decoder()
         self.command_timeout = command_timeout
         self.imperial = imperial
-        self.response = None  
+        self.response = None
         self.frame = None  # numpy array BGR -- current camera output frame
         self.is_freeze = False  # freeze current camera output
         self.last_frame = None
@@ -61,7 +61,7 @@ class Tello:
 
         self.socket.close()
         self.socket_video.close()
-    
+
     def read(self):
         """Return the last frame from camera."""
         if self.is_freeze:
@@ -108,13 +108,13 @@ class Tello:
 
             except socket.error as exc:
                 print ("Caught exception socket.error : %s" % exc)
-    
+
     def _h264_decode(self, packet_data):
         """
         decode raw h264 format data from Tello
-        
+
         :param packet_data: raw h264 data array
-       
+
         :return: a list of decoded frame
         """
         res_frame_list = []
@@ -151,7 +151,7 @@ class Tello:
             if self.abort_flag is True:
                 break
         timer.cancel()
-        
+
         if self.response is None:
             response = 'none_response'
         else:
@@ -160,13 +160,13 @@ class Tello:
         self.response = None
 
         return response
-    
+
     def set_abort_flag(self):
         """
         Sets self.abort_flag to True.
 
         Used by the timer in Tello.send_command() to indicate to that a response
-        
+
         timeout has occurred.
 
         """
@@ -288,7 +288,7 @@ class Tello:
             int: Percent battery life remaining.
 
         """
-        
+
         battery = self.send_command('battery?')
 
         try:
