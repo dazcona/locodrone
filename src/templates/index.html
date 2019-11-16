@@ -22,18 +22,18 @@
         <div class="row">
             <div class="col-6 col-sm-6 col-md-6">
                     <form>
-                            <a href=# id=forward><button type="button" class="btn btn-info btn-lg">Forward</button></a>
+                            <a id="forward"><button type="button" class="btn btn-info btn-lg">Forward</button></a>
                     </form>
             </div>
         </div>
         <div class="row">
             <div class="col-6 col-sm-6 col-md-6">
                     <form>
-                            <a href=# id=left><button type="button" class="btn btn-info btn-lg">Left</button></a>
+                            <a href=# id="back"><button type="button" class="btn btn-info btn-lg">Left</button></a>
                     </form>
                 <img src="/static/test.jpeg" class="img-rounded" alt="Test image!">
                 <form>
-                        <a href=# id=right><button type="button" class="btn btn-info btn-lg">Right</button></a>
+                        <a href=# id="left"><button type="button" class="btn btn-info btn-lg">Right</button></a>
                 </form>
             </div>
         </div>
@@ -41,19 +41,19 @@
         <div class="row">
             <div class="col-6 col-sm-6 col-md-6">
                     <form>
-                            <a href=# id=back><button type="button" class="btn btn-info btn-lg">Back</button></a>
+                            <a href=# id="right"><button type="button" class="btn btn-info btn-lg">Back</button></a>
                     </form>
             </div>
         </div>
         <div id="footer">
             <div class="col-6 col-sm-6 col-md-6">
                     <form>
-                            <a href=# id=land><button type="button" class="btn btn-info btn-lg">Land</button></a>
+                            <a href=# id="land"><button type="button" class="btn btn-info btn-lg">Land</button></a>
                     </form>
             </div>
             <div class="col-6 col-sm-6 col-md-6">
                     <form>
-                            <a href=# id=takeoff><button type="button" class="btn btn-info btn-lg">Take off</button></a>
+                            <a href=# id="takeoff"><button type="button" class="btn btn-info btn-lg">Take off</button></a>
                     </form>
             </div>
         </div>
@@ -61,66 +61,16 @@
 
 <script type=text/javascript>
 
-// Forward
         $(function() {
-          $('a#forward').bind('click', function() {
-            $.getJSON('/forward',
+          $('a').bind('click', function() {
+            const id = $(this).attr('id');
+            $.getJSON('/action/' + id,
                 function(data) {
-              //do nothing
+                  console.log("Action " + id + " taken");
             });
-            return false;
           });
         });
-// Right
-        $(function() {
-          $('a#right').bind('click', function() {
-            $.getJSON('/right',
-                function(data) {
-              //do nothing
-            });
-            return false;
-          });
-        });
-// Back
-        $(function() {
-          $('a#back').bind('click', function() {
-            $.getJSON('/back',
-                function(data) {
-              //do nothing
-            });
-            return false;
-          });
-        });
-// Left
-        $(function() {
-          $('a#left').bind('click', function() {
-            $.getJSON('/left',
-                function(data) {
-              //do nothing
-            });
-            return false;
-          });
-        });
-// Land
-      $(function() {
-        $('a#land').bind('click', function() {
-          $.getJSON('/land',
-              function(data) {
-            //do nothing
-          });
-          return false;
-        });
-      });
-// Take off
-      $(function() {
-        $('a#takeoff').bind('click', function() {
-          $.getJSON('/takeoff',
-              function(data) {
-            //do nothing
-          });
-          return false;
-        });
-      });
+
 </script>
 
 

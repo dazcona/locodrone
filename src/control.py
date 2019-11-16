@@ -20,21 +20,21 @@ class TelloUI:
 
         Raises:
             RuntimeError: If the Tello rejects the attempt to enter command mode.
-        """        
+        """
 
         self.tello = tello # videostream device
-        self.outputPath = outputpath # the path that save pictures created by clicking the takeSnapshot button 
-        self.frame = None  # frame read from h264decoder and used for pose recognition 
+        self.outputPath = outputpath # the path that save pictures created by clicking the takeSnapshot button
+        self.frame = None  # frame read from h264decoder and used for pose recognition
         self.thread = None # thread of the Tkinter mainloop
-        self.stopEvent = None  
-        
+        self.stopEvent = None
+
         # control variables
         self.distance = 0.1  # default distance for 'move' cmd
         self.degree = 30  # default degree for 'cw' or 'ccw' cmd
 
         # if the flag is TRUE,the auto-takeoff thread will stop waiting for the response from tello
         self.quit_waiting_flag = False
-        
+
         # # initialize the root window and image panel
         # self.root = tki.Tk()
         # self.panel = None
@@ -53,7 +53,7 @@ class TelloUI:
         #     self.root, text="Open Command Panel", relief="raised", command=self.openCmdWindow)
         # self.btn_landing.pack(side="bottom", fill="both",
         #                       expand="yes", padx=10, pady=5)
-        
+
         # start a thread that constantly pools the video sensor for
         # the most recently read frame
         self.stopEvent = threading.Event()
@@ -69,45 +69,46 @@ class TelloUI:
 
     def videoLoop(self):
         """
-        The mainloop thread of Tkinter 
+        The mainloop thread of Tkinter
         Raises:
             RuntimeError: To get around a RunTime error that Tkinter throws due to threading.
         """
         try:
-            # start the thread that get GUI image and drwa skeleton 
+            # start the thread that get GUI image and drwa skeleton
             time.sleep(0.5)
             self.sending_command_thread.start()
-            while not self.stopEvent.is_set():            
+            while not self.stopEvent.is_set():
             #     system = platform.system()
 
             # read the frame for GUI show
                 self.frame = self.tello.read()
-                
+
+                print self.frame
                 if self.frame is None or self.frame.size == 0:
-                    continue 
-            
+                    continue
+
                 print('here')
-            # transfer the format from frame to image         
+            # transfer the format from frame to image
                 image = Image.fromarray(self.frame)
 
-            # we found compatibility problem between Tkinter,PIL and Macos,and it will 
+            # we found compatibility problem between Tkinter,PIL and Macos,and it will
             # sometimes result the very long preriod of the "ImageTk.PhotoImage" function,
             # so for Macos,we start a new thread to execute the _updateGUIImage function.
-                # if system =="Windows" or system =="Linux":                
+                # if system =="Windows" or system =="Linux":
                 #     self._updateGUIImage(image)
 
                 # else:
                 #     thread_tmp = threading.Thread(target=self._updateGUIImage,args=(image,))
                 #     thread_tmp.start()
-                #     time.sleep(0.03)                                                            
+                #     time.sleep(0.03)
         except RuntimeError, e:
             print("[INFO] caught a RuntimeError")
 
-           
+
     # def _updateGUIImage(self,image):
     #     """
-    #     Main operation to initial the object of image,and update the GUI panel 
-    #     """  
+    #     Main operation to initial the object of image,and update the GUI panel
+    #     """
     #     image = ImageTk.PhotoImage(image)
     #     # if the panel none ,we need to initial it
     #     if self.panel is None:
@@ -119,26 +120,26 @@ class TelloUI:
     #         self.panel.configure(image=image)
     #         self.panel.image = image
 
-            
+
     def _sendingCommand(self):
         """
         start a while loop that sends 'command' to tello every 5 second
-        """    
+        """
 
         while True:
-            self.tello.send_command('command')        
+            self.tello.send_command('command')
             time.sleep(5)
 
-    def _setQuitWaitingFlag(self):  
+    def _setQuitWaitingFlag(self):
         """
-        set the variable as TRUE,it will stop computer waiting for response from tello  
-        """       
-        self.quit_waiting_flag = True        
-   
+        set the variable as TRUE,it will stop computer waiting for response from tello
+        """
+        self.quit_waiting_flag = True
+
     # def openCmdWindow(self):
     #     """
     #     open the cmd window and initial all the button and text
-    #     """        
+    #     """
     #     panel = Toplevel(self.root)
     #     panel.wm_title("Command Panel")
 
@@ -209,7 +210,7 @@ class TelloUI:
     #     """
     #     open the flip window and initial all the button and text
     #     """
-        
+
     #     panel = Toplevel(self.root)
     #     panel.wm_title("Gesture Recognition")
 
@@ -232,7 +233,7 @@ class TelloUI:
     #         panel, text="Flip Backward", relief="raised", command=self.telloFlip_b)
     #     self.btn_flipb.pack(side="bottom", fill="both",
     #                         expand="yes", padx=10, pady=5)
-       
+
     def takeSnapshot(self):
         """
         save the current frame of the video as a jpg file and put it into outputpath
@@ -263,7 +264,7 @@ class TelloUI:
             self.tello.video_freeze(True)
 
     def telloTakeOff(self):
-        return self.tello.takeoff()                
+        return self.tello.takeoff()
 
     def telloLanding(self):
         return self.tello.land()
@@ -355,11 +356,10 @@ class TelloUI:
     def onClose(self):
         """
         set the stop event, cleanup the camera, and allow the rest of
-        
+
         the quit process to continue
         """
         print("[INFO] closing...")
         self.stopEvent.set()
         del self.tello
         # self.root.quit()
-
