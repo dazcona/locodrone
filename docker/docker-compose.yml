@@ -10,6 +10,7 @@ services:
     build:
       context: ../
       dockerfile: docker/Dockerfile
+      network: host
 
     # Setup environment variables:
     environment:
@@ -22,6 +23,13 @@ services:
       - ../:/code
       # Plot images on Linux
       - /tmp/.X11-unix:/tmp/.X11-unix
+
+    # Ports:
+    ports:
+      # Flask
+      - "5000:5000"
+      # Drone
+      - "8889:8889"
 
     # NVIDIA GPU (requires nvidia-docker):
     # runtime: nvidia
