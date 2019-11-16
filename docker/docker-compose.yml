@@ -1,0 +1,30 @@
+version: "2.3"
+
+services:
+
+  drone:
+    
+    image: drone
+    container_name: drone
+    working_dir: /code
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+
+    # Setup environment variables:
+    environment:
+      - PYTHONPATH=/code
+      # Plot images on Linux
+      - DISPLAY=unix$DISPLAY
+
+    # Setup the volumes you want to share:
+    volumes:
+      - ../:/code
+      # Plot images on Linux
+      - /tmp/.X11-unix:/tmp/.X11-unix
+
+    # NVIDIA GPU (requires nvidia-docker):
+    # runtime: nvidia
+
+    command: tail /dev/null -f # stay alive without running any command
+    # command: python3 src/colmap.py
