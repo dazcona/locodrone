@@ -10,12 +10,17 @@ class Fly:
     def __init__(self):
         self.drone = None
 
+    @property
+    def empty(self):
+        return self.drone == None
 
 fly = Fly()
 
+
 @app.route('/')
 def index():
-    fly.drone = tello.Tello('', 8989)
+    if fly.empty:
+        fly.drone = tello.Tello('', 8989)
     # vplayer = TelloUI(drone, '/code')
     # time.sleep(3)
     # vplayer.onClose()
@@ -31,6 +36,8 @@ def action(action):
     else:
         fly.drone.move(action, .02)
     return "200"
+
+
 
 
 if __name__ == '__main__':
