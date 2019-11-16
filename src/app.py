@@ -20,7 +20,7 @@ fly = Fly()
 @app.route('/')
 def index():
     if fly.empty:
-        fly.drone = tello.Tello('', 8989)
+        fly.drone = tello.Tello('', 8889)
     # vplayer = TelloUI(drone, '/code')
     # time.sleep(3)
     # vplayer.onClose()
@@ -42,4 +42,4 @@ def action(action):
 
 if __name__ == '__main__':
 
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    app.run(debug=True, host='0.0.0.0', port=5000)
