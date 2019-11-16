@@ -24,7 +24,8 @@ RUN pip install \
     Flask \
     numpy \
     matplotlib \
-    opencv-python
+    opencv-python \
+    pillow
 
 # imaging-tk
 
@@ -40,6 +41,6 @@ RUN cmake ..
 RUN make -j4 && make install
 
 # Remove unneeded files
-RUN rm -rf /tools
+# RUN rm -rf /tools
 
 WORKDIR /code
