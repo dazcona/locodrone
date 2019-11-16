@@ -83,6 +83,7 @@ class TelloUI:
             # read the frame for GUI show
                 self.frame = self.tello.read()
                 
+                print(self.frame)
                 if self.frame is None or self.frame.size == 0:
                     continue 
             
