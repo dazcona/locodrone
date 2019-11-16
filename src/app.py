@@ -39,7 +39,7 @@ def video():
 
     drone = tello.Tello('', 8889)
     vplayer = TelloUI(drone, "/code/pictures/")
-    time.sleep(2)
+    time.sleep(45)
     print('Stopping!')
     vplayer.onClose()
 
