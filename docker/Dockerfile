@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
 
 # Python dependencies
 RUN pip install \
+    Flask \
     numpy \
     matplotlib \
     opencv-python
