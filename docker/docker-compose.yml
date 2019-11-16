@@ -26,10 +26,10 @@ services:
 
     # Ports:
     # ports:
-    #   # Flask
-    #   - "5001:5001"
-    #   # Drone
-    #   - "8989:8989"
+      # Flask
+      - "5000:5000"
+      # Drone
+      - "8889:8889"
 
     # NVIDIA GPU (requires nvidia-docker):
     # runtime: nvidia
