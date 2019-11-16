@@ -38,3 +38,35 @@ h1 {
                  0 24px 24px rgba(0,0,0,.2),
                  0 36px 36px rgba(0,0,0,.15);
 }
+
+#pre-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #f1f1f1;
+    width: 100%;
+    height: 100%;
+}
+.loadingGraphics {
+    display: inline-block;
+    width: 300px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+}
+.drone {
+    width: 300px;
+    height: 300px;
+}
+.blade {
+    
+}
+.loadingText {
+    font-family: sans-serif;
+    font-size: 2em;
+    color: #999;
+    text-transform: uppercase;
+    text-align: center;
+}
