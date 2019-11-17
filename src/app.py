@@ -8,6 +8,7 @@ from PIL import Image
 from VideoDrone import VideoDrone
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secretkey'
 
 class Fly:
 	def __init__(self):
@@ -45,7 +46,7 @@ def action(action):
 	elif action == 'takeoff':
 		result = fly.drone.takeoff()
 	else:
-		result = fly.drone.move(action, 3)
+		result = fly.drone.move(action, 1.5)
 	print("Action result: ", result)
 	return "200"
 
@@ -69,4 +70,4 @@ def gen(camera):
 
 if __name__ == '__main__':
 
-	app.run(debug=True, host='0.0.0.0', port=5000)
+	app.run(debug=True, host='0.0.0.0', port=5000,threaded=True, use_reloader=False)
