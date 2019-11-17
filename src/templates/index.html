@@ -9,55 +9,51 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js"></script>
 
     <h1>LOCO DRONE</h1>
+    <h2>Collaborative flying</h2>
+    <h3>What could go wrong?! </h3>
 
 </head>
 
 <body onload="drone()">
     <div class="container" id="page">
         <div class="row">
-            <div class="col-6 col-sm-6 col-md-6">
+            <div class="col-3 col-sm-3 col-md-3 center-block">
                     <form>
-                            <a id="forward"><button type="button" class="btn btn-info btn-lg">Forward</button></a>
+                            <a id="forward"><button type="button" class="btn btn-info btn-lg btn-block">Forward</button></a>
                     </form>
             </div>
         </div>
+        <br><br>
         <div class="row">
-            <div class="col-6 col-sm-6 col-md-6">
+            <div class="col-3 col-sm-3 col-md-3 center-block">
                     <form>
-                            <a href=# id="left"><button type="button" class="btn btn-info btn-lg">Left</button></a>
+                            <a href=# id="back"><button type="button" class="btn btn-info btn-lg pull-left">Left</button></a>
                     </form>
-                <img src="/static/test.jpeg" class="img-rounded" alt="Test image!">
+                </div>
+                
+                <div class="col-3 col-sm-3 col-md-3 center-block">
                 <form>
-                        <a href=# id="right"><button type="button" class="btn btn-info btn-lg">Right</button></a>
+                        <a href=# id="left"><button type="button" class="btn btn-info btn-lg pull-right">Right</button></a>
                 </form>
             </div>
         </div>
+        <br><br>
+        <div class="row"></div>
+        <div class="col-3 col-sm-3 col-md-3 center-block">
+                <form>
+                        <a href=# id="right"><button type="button" class="btn btn-info btn-lg btn-block">Backward</button></a>
+                </form>
+            </div>
 
-        <div class="row">
-            <div class="col-6 col-sm-6 col-md-6">
-                    <form>
-                            <a href=# id="back"><button type="button" class="btn btn-info btn-lg">Back</button></a>
-                    </form>
-            </div>
-        </div>
-        <div id="footer">
-            <div class="col-6 col-sm-6 col-md-6">
-                    <form>
-                            <a href=# id="land"><button type="button" class="btn btn-info btn-lg">Land</button></a>
-                    </form>
-            </div>
-            <div class="col-6 col-sm-6 col-md-6">
-                    <form>
-                            <a href=# id="takeoff"><button type="button" class="btn btn-info btn-lg">Take off</button></a>
-                    </form>
-            </div>
-        </div>
+    </div>
+
     </div>
 
 <script type=text/javascript>
@@ -78,7 +74,7 @@ function drone() {
         });
 
 
-      }, 2500);
+      }, 1500);
 
 }
 </script>
