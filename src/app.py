@@ -27,6 +27,14 @@ def index():
 
 	return render_template('streaming.html')
 
+@app.route('/admin')
+def admin():
+	# if fly.empty:
+	# 	print("Initializing drone...")
+	# 	fly.drone = tello.Tello('', 8889)
+
+	return render_template('admin.html')
+
 @app.route('/action/<action>')
 def action(action):
 	print(action)
