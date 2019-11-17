@@ -25,7 +25,7 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
 
     # Ports:
-    # ports:
+    ports:
       # Flask
       - "5000:5000"
       # Drone
