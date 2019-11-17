@@ -19,13 +19,23 @@ class Fly:
 fly = Fly()
 
 
-@app.route('/')
-def index():
+def check_drone():
 	if fly.empty:
 		print("Initializing drone...")
 		fly.drone = tello.Tello('', 8889)
 
-	return render_template('streaming.html')
+
+@app.route('/')
+def index():
+	check_drone()
+	return render_template('index.html')
+
+
+@app.route('/admin')
+def admin():
+	check_drone()
+	return render_template('admin.html')
+
 
 @app.route('/action/<action>')
 def action(action):
@@ -39,10 +49,6 @@ def action(action):
 	print("Action result: ", result)
 	return "200"
 
-@app.route('/photo')
-def photo():
-	fly.player.takeSnapshot()
-	return "200"
 
 @app.route('/streaming')
 def streaming():
