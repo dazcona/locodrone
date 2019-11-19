@@ -7,8 +7,10 @@ import cv2
 from PIL import Image
 from VideoDrone import VideoDrone
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secretkey'
+
 
 class Fly:
 	def __init__(self):
@@ -53,7 +55,7 @@ def action(action):
 
 @app.route('/streaming')
 def streaming():
-
+	check_drone()
 	return Response(gen(VideoDrone(fly.drone)),
 		mimetype = "multipart/x-mixed-replace; boundary=frame")
 
@@ -67,7 +69,6 @@ def gen(camera):
 			   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
-
 if __name__ == '__main__':
 
-	app.run(debug=True, host='0.0.0.0', port=5000,threaded=True, use_reloader=False)
+	app.run(debug=True, host='0.0.0.0', port=5000, threaded=True, use_reloader=False)

@@ -7,4 +7,3 @@
 **/.vscode/
 projects/*
 !projects/.gitkeep
-DroneBlocks-Tello-Flask-Camera/
